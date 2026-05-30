@@ -72,21 +72,6 @@ function toStoredRSVP(row: SupabaseRSVP): StoredRSVP {
   };
 }
 
-function toSupabaseRow(response: StoredRSVP) {
-  return {
-    id: response.id,
-    party_key: response.partyKey,
-    name: response.name,
-    email: response.email || null,
-    status: response.status,
-    event_ids: response.eventIds,
-    guest_count: response.guestCount,
-    message: response.message || null,
-    created_at: response.createdAt,
-    updated_at: response.updatedAt,
-  };
-}
-
 async function readLocalData(): Promise<LocalDataFile> {
   try {
     const file = await readFile(dataFile, "utf8");
@@ -155,38 +140,24 @@ async function listLocalRSVPs(): Promise<StoredRSVP[]> {
 }
 
 async function saveSupabaseRSVP(submission: RSVPSubmission): Promise<StoredRSVP> {
-  const now = new Date().toISOString();
   const partyKey = createPartyKey(submission);
-  const existing = await fetch(
-    `${process.env.SUPABASE_URL}/rest/v1/rsvps?party_key=eq.${encodeURIComponent(
-      partyKey,
-    )}&select=*`,
-    { headers: supabaseHeaders(), cache: "no-store" },
-  );
-
-  if (!existing.ok) {
-    throw new Error("Unable to check existing RSVP");
-  }
-
-  const existingRows = (await existing.json()) as SupabaseRSVP[];
-  const previous = existingRows[0] ? toStoredRSVP(existingRows[0]) : undefined;
-  const response: StoredRSVP = {
-    ...submission,
-    id: previous?.id ?? createId(),
-    partyKey,
-    createdAt: previous?.createdAt ?? now,
-    updatedAt: now,
-  };
-
   const saved = await fetch(
-    `${process.env.SUPABASE_URL}/rest/v1/rsvps?on_conflict=party_key`,
+    `${process.env.SUPABASE_URL}/rest/v1/rpc/submit_rsvp`,
     {
       method: "POST",
       headers: {
         ...supabaseHeaders(),
-        Prefer: "resolution=merge-duplicates,return=representation",
       },
-      body: JSON.stringify(toSupabaseRow(response)),
+      body: JSON.stringify({
+        rsvp_id: createId(),
+        rsvp_party_key: partyKey,
+        rsvp_name: submission.name,
+        rsvp_email: submission.email || null,
+        rsvp_status: submission.status,
+        rsvp_event_ids: submission.eventIds,
+        rsvp_guest_count: submission.guestCount,
+        rsvp_message: submission.message || null,
+      }),
       cache: "no-store",
     },
   );
@@ -195,8 +166,14 @@ async function saveSupabaseRSVP(submission: RSVPSubmission): Promise<StoredRSVP>
     throw new Error("Unable to save RSVP");
   }
 
-  const rows = (await saved.json()) as SupabaseRSVP[];
-  return rows[0] ? toStoredRSVP(rows[0]) : response;
+  const result = (await saved.json()) as SupabaseRSVP | SupabaseRSVP[];
+  const row = Array.isArray(result) ? result[0] : result;
+
+  if (!row) {
+    throw new Error("Unable to save RSVP");
+  }
+
+  return toStoredRSVP(row);
 }
 
 async function listSupabaseRSVPs(): Promise<StoredRSVP[]> {
