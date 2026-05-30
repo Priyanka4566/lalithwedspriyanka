@@ -35,6 +35,18 @@ function hasSupabaseConfig() {
   return Boolean(process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY);
 }
 
+function shouldRequireSupabase() {
+  return process.env.VERCEL === "1" || process.env.NODE_ENV === "production";
+}
+
+function assertProductionStorageConfigured() {
+  if (!hasSupabaseConfig() && shouldRequireSupabase()) {
+    throw new Error(
+      "Supabase is not configured. Add SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in Vercel.",
+    );
+  }
+}
+
 function supabaseHeaders() {
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
@@ -206,6 +218,8 @@ export async function saveRSVP(submission: RSVPSubmission) {
     return saveSupabaseRSVP(submission);
   }
 
+  assertProductionStorageConfigured();
+
   return saveLocalRSVP(submission);
 }
 
@@ -213,6 +227,8 @@ export async function listRSVPs() {
   if (hasSupabaseConfig()) {
     return listSupabaseRSVPs();
   }
+
+  assertProductionStorageConfigured();
 
   return listLocalRSVPs();
 }

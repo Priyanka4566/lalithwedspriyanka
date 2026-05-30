@@ -53,3 +53,17 @@ create table if not exists public.rsvps (
 ```
 
 The service role key is used only on server routes. Do not expose it as a `NEXT_PUBLIC_` variable.
+
+## Deploy To Vercel
+
+This app includes `vercel.json`, so Vercel will install dependencies with `npm install` and build with `npm run build`.
+
+1. Import this GitHub repo into Vercel.
+2. Add these Vercel environment variables from `.env.example`:
+   - `SUPABASE_URL`
+   - `SUPABASE_SERVICE_ROLE_KEY`
+   - `ADMIN_TOKEN`
+3. Deploy the project.
+4. Add the GoDaddy domain in Vercel, then copy the DNS records Vercel gives you into GoDaddy DNS.
+
+RSVP storage requires Supabase in production. Local file storage is only for local development.
