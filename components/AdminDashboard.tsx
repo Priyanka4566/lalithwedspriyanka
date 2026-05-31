@@ -13,11 +13,23 @@ type SummaryResponse =
       error: string;
     };
 
+type DeleteResponse =
+  | {
+      ok: true;
+      id: string;
+    }
+  | {
+      ok: false;
+      error: string;
+    };
+
 export function AdminDashboard() {
   const [summary, setSummary] = useState<RSVPSummary | null>(null);
   const [token, setToken] = useState("");
+  const [selectedResponseId, setSelectedResponseId] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const updatedAt = useMemo(() => {
     if (!summary) return "";
@@ -27,6 +39,12 @@ export function AdminDashboard() {
       timeStyle: "short",
     }).format(new Date(summary.generatedAt));
   }, [summary]);
+
+  const selectedResponse = useMemo(() => {
+    if (!summary || !selectedResponseId) return null;
+
+    return summary.responses.find((response) => response.id === selectedResponseId) ?? null;
+  }, [selectedResponseId, summary]);
 
   const loadSummary = async (adminToken = token) => {
     setIsLoading(true);
@@ -44,6 +62,11 @@ export function AdminDashboard() {
       }
 
       setSummary(result.summary);
+      setSelectedResponseId((currentId) =>
+        result.summary.responses.some((response) => response.id === currentId)
+          ? currentId
+          : "",
+      );
 
       if (adminToken) {
         window.localStorage.setItem("wedding-admin-token", adminToken);
@@ -55,6 +78,39 @@ export function AdminDashboard() {
       );
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const deleteSelectedResponse = async () => {
+    if (!selectedResponse) return;
+
+    const shouldDelete = window.confirm(
+      `Delete RSVP for ${selectedResponse.name}? This will remove it from the database and update all event counts.`,
+    );
+
+    if (!shouldDelete) return;
+
+    setIsDeleting(true);
+    setErrorMessage("");
+
+    try {
+      const response = await fetch(`/api/rsvp/${encodeURIComponent(selectedResponse.id)}`, {
+        method: "DELETE",
+        headers: token ? { "x-admin-token": token } : undefined,
+        cache: "no-store",
+      });
+      const result = (await response.json()) as DeleteResponse;
+
+      if (!response.ok || !result.ok) {
+        throw new Error(result.ok ? "Unable to delete RSVP" : result.error);
+      }
+
+      setSelectedResponseId("");
+      await loadSummary();
+    } catch (error) {
+      setErrorMessage(error instanceof Error ? error.message : "Unable to delete RSVP");
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -146,9 +202,27 @@ export function AdminDashboard() {
             </div>
 
             <div className="admin-responses">
-              <h2>All Responses</h2>
+              <div className="admin-responses-header">
+                <div>
+                  <h2>All Responses</h2>
+                  <p>
+                    {selectedResponse
+                      ? `Selected ${selectedResponse.name}`
+                      : "Select a response to delete it from the database."}
+                  </p>
+                </div>
+                <button
+                  className="admin-delete"
+                  type="button"
+                  disabled={!selectedResponse || isDeleting}
+                  onClick={deleteSelectedResponse}
+                >
+                  {isDeleting ? "Deleting..." : "Delete Selected"}
+                </button>
+              </div>
               <div className="admin-table">
                 <div className="admin-table-row admin-table-head">
+                  <span>Select</span>
                   <span>Name</span>
                   <span>Status</span>
                   <span>Events</span>
@@ -156,7 +230,21 @@ export function AdminDashboard() {
                   <span>Message</span>
                 </div>
                 {summary.responses.map((response) => (
-                  <div className="admin-table-row" key={response.id}>
+                  <label
+                    className={`admin-table-row admin-response-row${
+                      selectedResponseId === response.id ? " selected" : ""
+                    }`}
+                    key={response.id}
+                  >
+                    <span>
+                      <input
+                        aria-label={`Select RSVP from ${response.name}`}
+                        type="radio"
+                        name="selected-rsvp"
+                        checked={selectedResponseId === response.id}
+                        onChange={() => setSelectedResponseId(response.id)}
+                      />
+                    </span>
                     <span>
                       <strong>{response.name}</strong>
                       <small>{response.email || "No email"}</small>
@@ -165,7 +253,7 @@ export function AdminDashboard() {
                     <span>{response.events.join(", ") || "None"}</span>
                     <span>{response.guestCount}</span>
                     <span>{response.message || "No message"}</span>
-                  </div>
+                  </label>
                 ))}
               </div>
             </div>

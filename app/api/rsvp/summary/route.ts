@@ -1,24 +1,11 @@
 import { NextResponse } from "next/server";
+import { isAuthorizedAdminRequest } from "@/lib/adminAuth";
 import { getRSVPSummary } from "@/lib/rsvpStore";
 
 export const runtime = "nodejs";
 
-function isAuthorized(request: Request) {
-  const adminToken = process.env.ADMIN_TOKEN;
-
-  if (!adminToken && process.env.NODE_ENV !== "production") {
-    return true;
-  }
-
-  const url = new URL(request.url);
-  const providedToken =
-    request.headers.get("x-admin-token") ?? url.searchParams.get("token") ?? "";
-
-  return Boolean(adminToken && providedToken === adminToken);
-}
-
 export async function GET(request: Request) {
-  if (!isAuthorized(request)) {
+  if (!isAuthorizedAdminRequest(request)) {
     return NextResponse.json(
       {
         ok: false,

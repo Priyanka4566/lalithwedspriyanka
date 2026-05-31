@@ -139,6 +139,18 @@ async function listLocalRSVPs(): Promise<StoredRSVP[]> {
   return data.responses.sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
 }
 
+async function deleteLocalRSVP(id: string) {
+  const data = await readLocalData();
+  const nextResponses = data.responses.filter((response) => response.id !== id);
+
+  if (nextResponses.length === data.responses.length) {
+    return false;
+  }
+
+  await writeLocalData({ responses: nextResponses });
+  return true;
+}
+
 async function saveSupabaseRSVP(submission: RSVPSubmission): Promise<StoredRSVP> {
   const partyKey = createPartyKey(submission);
   const saved = await fetch(
@@ -190,6 +202,27 @@ async function listSupabaseRSVPs(): Promise<StoredRSVP[]> {
   return rows.map(toStoredRSVP);
 }
 
+async function deleteSupabaseRSVP(id: string) {
+  const response = await fetch(
+    `${process.env.SUPABASE_URL}/rest/v1/rsvps?id=eq.${encodeURIComponent(id)}`,
+    {
+      method: "DELETE",
+      headers: {
+        ...supabaseHeaders(),
+        Prefer: "return=representation",
+      },
+      cache: "no-store",
+    },
+  );
+
+  if (!response.ok) {
+    throw new Error("Unable to delete RSVP");
+  }
+
+  const rows = (await response.json()) as SupabaseRSVP[];
+  return rows.length > 0;
+}
+
 export async function saveRSVP(submission: RSVPSubmission) {
   if (hasSupabaseConfig()) {
     return saveSupabaseRSVP(submission);
@@ -208,6 +241,16 @@ export async function listRSVPs() {
   assertProductionStorageConfigured();
 
   return listLocalRSVPs();
+}
+
+export async function deleteRSVP(id: string) {
+  if (hasSupabaseConfig()) {
+    return deleteSupabaseRSVP(id);
+  }
+
+  assertProductionStorageConfigured();
+
+  return deleteLocalRSVP(id);
 }
 
 export async function getRSVPSummary() {
