@@ -3,6 +3,7 @@ import path from "path";
 import {
   buildRSVPSummary,
   createPartyKey,
+  rsvpEvents,
   type RSVPSubmission,
   type StoredRSVP,
 } from "./rsvp";
@@ -22,6 +23,20 @@ type SupabaseRSVP = {
   message: string | null;
   created_at: string;
   updated_at: string;
+};
+
+export class DuplicateRSVPError extends Error {
+  existing: StoredRSVP;
+
+  constructor(existing: StoredRSVP) {
+    super("An RSVP already exists for this email address");
+    this.name = "DuplicateRSVPError";
+    this.existing = existing;
+  }
+}
+
+type SaveRSVPOptions = {
+  allowUpdate?: boolean;
 };
 
 const dataDirectory = path.join(process.cwd(), "data");
@@ -134,6 +149,12 @@ async function saveLocalRSVP(submission: RSVPSubmission): Promise<StoredRSVP> {
   return response;
 }
 
+async function findLocalRSVPByPartyKey(partyKey: string): Promise<StoredRSVP | null> {
+  const data = await readLocalData();
+
+  return data.responses.find((response) => response.partyKey === partyKey) ?? null;
+}
+
 async function listLocalRSVPs(): Promise<StoredRSVP[]> {
   const data = await readLocalData();
   return data.responses.sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
@@ -149,6 +170,22 @@ async function deleteLocalRSVP(id: string) {
 
   await writeLocalData({ responses: nextResponses });
   return true;
+}
+
+async function findSupabaseRSVPByPartyKey(partyKey: string): Promise<StoredRSVP | null> {
+  const response = await fetch(
+    `${process.env.SUPABASE_URL}/rest/v1/rsvps?party_key=eq.${encodeURIComponent(
+      partyKey,
+    )}&select=*&limit=1`,
+    { headers: supabaseHeaders(), cache: "no-store" },
+  );
+
+  if (!response.ok) {
+    throw new Error("Unable to check existing RSVP");
+  }
+
+  const rows = (await response.json()) as SupabaseRSVP[];
+  return rows[0] ? toStoredRSVP(rows[0]) : null;
 }
 
 async function saveSupabaseRSVP(submission: RSVPSubmission): Promise<StoredRSVP> {
@@ -223,7 +260,43 @@ async function deleteSupabaseRSVP(id: string) {
   return rows.length > 0;
 }
 
-export async function saveRSVP(submission: RSVPSubmission) {
+export function describeRSVP(response: StoredRSVP) {
+  return {
+    id: response.id,
+    name: response.name,
+    email: response.email,
+    status: response.status,
+    events: rsvpEvents
+      .filter((event) => response.eventIds.includes(event.id))
+      .map((event) => event.title),
+    guestCount: response.guestCount,
+    message: response.message,
+    updatedAt: response.updatedAt,
+  };
+}
+
+export async function findRSVPBySubmissionIdentity(submission: RSVPSubmission) {
+  const partyKey = createPartyKey(submission);
+
+  if (hasSupabaseConfig()) {
+    return findSupabaseRSVPByPartyKey(partyKey);
+  }
+
+  assertProductionStorageConfigured();
+
+  return findLocalRSVPByPartyKey(partyKey);
+}
+
+export async function saveRSVP(
+  submission: RSVPSubmission,
+  options: SaveRSVPOptions = {},
+) {
+  const existing = await findRSVPBySubmissionIdentity(submission);
+
+  if (existing && !options.allowUpdate) {
+    throw new DuplicateRSVPError(existing);
+  }
+
   if (hasSupabaseConfig()) {
     return saveSupabaseRSVP(submission);
   }

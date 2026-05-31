@@ -18,6 +18,38 @@ type RSVPFormValues = {
   message: string;
 };
 
+type RSVPSubmitPayload = {
+  name: string;
+  email: string;
+  status: RSVPStatus;
+  eventIds: string[];
+  guestCount: number;
+  message: string;
+};
+
+type ExistingRSVPDetails = {
+  name: string;
+  email: string;
+  status: RSVPStatus;
+  events: string[];
+  guestCount: number;
+  message: string;
+  updatedAt: string;
+};
+
+type RSVPSubmitResponse =
+  | {
+      ok: true;
+      id: string;
+      updatedAt: string;
+    }
+  | {
+      ok: false;
+      error: string;
+      duplicate?: boolean;
+      existing?: ExistingRSVPDetails;
+    };
+
 const initialFormValues: RSVPFormValues = {
   name: "",
   guests: "1",
@@ -31,6 +63,8 @@ export function RSVPForm({ endpoint }: RSVPFormProps) {
   const [formValues, setFormValues] = useState<RSVPFormValues>(initialFormValues);
   const [submitState, setSubmitState] = useState<"idle" | "loading" | "success">("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const [duplicateRSVP, setDuplicateRSVP] = useState<ExistingRSVPDetails | null>(null);
+  const [pendingPayload, setPendingPayload] = useState<RSVPSubmitPayload | null>(null);
 
   const isAttending = status === "all" || status === "selected";
 
@@ -38,6 +72,8 @@ export function RSVPForm({ endpoint }: RSVPFormProps) {
     (field: keyof RSVPFormValues) =>
     (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       setFormValues((current) => ({ ...current, [field]: event.target.value }));
+      setDuplicateRSVP(null);
+      setPendingPayload(null);
     };
 
   const updateGuestCount = (event: ChangeEvent<HTMLInputElement>) => {
@@ -52,6 +88,8 @@ export function RSVPForm({ endpoint }: RSVPFormProps) {
   const selectStatus = (nextStatus: RSVPStatus) => {
     setStatus(nextStatus);
     setErrorMessage("");
+    setDuplicateRSVP(null);
+    setPendingPayload(null);
 
     if (nextStatus !== "selected") {
       setSelectedEventIds([]);
@@ -74,6 +112,8 @@ export function RSVPForm({ endpoint }: RSVPFormProps) {
 
   const selectEvent = (eventId: string) => {
     setSelectedEventIds([eventId]);
+    setDuplicateRSVP(null);
+    setPendingPayload(null);
   };
 
   const validate = () => {
@@ -86,6 +126,11 @@ export function RSVPForm({ endpoint }: RSVPFormProps) {
 
     if (!fullName) {
       alert("Please enter your name");
+      return false;
+    }
+
+    if (!formValues.email.trim()) {
+      alert("Please enter your email address");
       return false;
     }
 
@@ -106,16 +151,8 @@ export function RSVPForm({ endpoint }: RSVPFormProps) {
     return true;
   };
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const submitRSVP = async (payload: RSVPSubmitPayload, confirmOverwrite = false) => {
     setErrorMessage("");
-
-    if (!validate()) return;
-
-    const fullName = formValues.name.trim();
-    const emailAddress = formValues.email.trim();
-    const blessings = formValues.message.trim();
-
     setSubmitState("loading");
 
     try {
@@ -125,23 +162,30 @@ export function RSVPForm({ endpoint }: RSVPFormProps) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name: fullName,
-          email: emailAddress,
-          status,
-          eventIds: status === "selected" ? selectedEventIds : [],
-          guestCount: isAttending ? Number(formValues.guests) : 0,
-          message: blessings,
+          ...payload,
+          confirmOverwrite,
         }),
       });
 
       const result = (await response.json().catch(() => null)) as
-        | { error?: string }
+        | RSVPSubmitResponse
         | null;
 
       if (!response.ok) {
-        throw new Error(result?.error ?? "Unable to save your RSVP");
+        if (response.status === 409 && result && !result.ok && result.duplicate && result.existing) {
+          setDuplicateRSVP(result.existing);
+          setPendingPayload(payload);
+          setSubmitState("idle");
+          return;
+        }
+
+        throw new Error(
+          result && !result.ok ? result.error : "Unable to save your RSVP",
+        );
       }
 
+      setDuplicateRSVP(null);
+      setPendingPayload(null);
       setSubmitState("success");
     } catch (error) {
       setSubmitState("idle");
@@ -151,6 +195,31 @@ export function RSVPForm({ endpoint }: RSVPFormProps) {
           : "Unable to save your RSVP. Please try again.",
       );
     }
+  };
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (!validate()) return;
+
+    const fullName = formValues.name.trim();
+    const emailAddress = formValues.email.trim().toLowerCase();
+    const blessings = formValues.message.trim();
+
+    await submitRSVP({
+      name: fullName,
+      email: emailAddress,
+      status: status as RSVPStatus,
+      eventIds: status === "selected" ? selectedEventIds : [],
+      guestCount: isAttending ? Number(formValues.guests) : 0,
+      message: blessings,
+    });
+  };
+
+  const confirmOverwrite = () => {
+    if (!pendingPayload) return;
+
+    void submitRSVP(pendingPayload, true);
   };
 
   return (
@@ -256,6 +325,7 @@ export function RSVPForm({ endpoint }: RSVPFormProps) {
                       placeholder="your@email.com"
                       value={formValues.email}
                       onChange={updateField("email")}
+                      required
                     />
                   </div>
 
@@ -275,6 +345,34 @@ export function RSVPForm({ endpoint }: RSVPFormProps) {
                   <button className="btn-submit" type="submit">
                     Send Love ✦
                   </button>
+                  {duplicateRSVP ? (
+                    <div className="rsvp-duplicate" role="alert">
+                      <strong>You already submitted an RSVP with this email.</strong>
+                      <p>
+                        Previous response: {duplicateRSVP.status}
+                        {duplicateRSVP.events.length
+                          ? ` for ${duplicateRSVP.events.join(", ")}`
+                          : ""}
+                        {duplicateRSVP.status !== "decline"
+                          ? `, ${duplicateRSVP.guestCount} guest${
+                              duplicateRSVP.guestCount === 1 ? "" : "s"
+                            }`
+                          : ""}
+                        .
+                      </p>
+                      <p>
+                        Name used: {duplicateRSVP.name}. Submitting again will override
+                        the old response.
+                      </p>
+                      <button
+                        className="btn-submit rsvp-overwrite"
+                        type="button"
+                        onClick={confirmOverwrite}
+                      >
+                        Confirm & Update RSVP
+                      </button>
+                    </div>
+                  ) : null}
                   {errorMessage ? <p className="rsvp-error">{errorMessage}</p> : null}
                 </div>
               ) : null}

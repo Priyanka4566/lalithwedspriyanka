@@ -851,6 +851,31 @@ body {
   line-height: 1.5;
   text-align: center;
 }
+.rsvp-duplicate {
+  margin-top: 1rem;
+  border: 1px solid rgba(154,37,54,0.22);
+  border-radius: 12px;
+  background: rgba(154,37,54,0.07);
+  padding: 0.9rem;
+  color: #4A1E25;
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+.rsvp-duplicate strong {
+  display: block;
+  margin-bottom: 0.4rem;
+  color: #9A2536;
+  font-weight: 500;
+}
+.rsvp-duplicate p {
+  margin: 0.35rem 0 0;
+}
+.rsvp-overwrite {
+  margin-top: 0.8rem;
+  min-height: 44px;
+  background: linear-gradient(135deg, #9A2536, #6F1725);
+  box-shadow: none;
+}
 /* Loading & Success states */
 .rsvp-loading {
   display: none;

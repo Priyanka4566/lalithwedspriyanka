@@ -88,6 +88,14 @@ export function parseRSVPSubmission(payload: unknown): RSVPSubmission {
     throw new Error("Please enter your name");
   }
 
+  if (!email) {
+    throw new Error("Please enter your email address");
+  }
+
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    throw new Error("Please enter a valid email address");
+  }
+
   if (!isRSVPStatus(statusValue)) {
     throw new Error("Please select your RSVP status");
   }
@@ -138,8 +146,7 @@ export function parseRSVPSubmission(payload: unknown): RSVPSubmission {
 }
 
 export function createPartyKey(submission: Pick<RSVPSubmission, "email" | "name">) {
-  const source = submission.email || submission.name;
-  return source.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+  return submission.email.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 }
 
 export function buildRSVPSummary(responses: StoredRSVP[]): RSVPSummary {
