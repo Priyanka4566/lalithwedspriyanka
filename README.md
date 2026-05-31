@@ -35,7 +35,13 @@ SUPABASE_SERVICE_ROLE_KEY=...
 ADMIN_TOKEN=...
 ```
 
-Create the Supabase table:
+Create the Supabase table by running the SQL in:
+
+```txt
+supabase/migrations/202605300001_create_rsvps.sql
+```
+
+Or paste this SQL into the Supabase SQL editor:
 
 ```sql
 create table if not exists public.rsvps (
@@ -43,9 +49,9 @@ create table if not exists public.rsvps (
   party_key text not null unique,
   name text not null,
   email text,
-  status text not null,
+  status text not null check (status in ('all', 'selected', 'decline')),
   event_ids jsonb not null default '[]'::jsonb,
-  guest_count integer not null default 0,
+  guest_count integer not null default 0 check (guest_count >= 0 and guest_count <= 10),
   message text,
   created_at timestamptz not null,
   updated_at timestamptz not null
