@@ -169,36 +169,53 @@ export function AdminDashboard() {
             </div>
 
             <div className="admin-events">
-              {summary.events.map((event) => (
-                <article className="admin-event-card" key={event.id}>
-                  <div className="admin-event-heading">
-                    <div>
-                      <h2>{event.title}</h2>
-                      <p>{event.date}</p>
+              {summary.events.map((event) => {
+                const hasAttendees =
+                  event.partyCount > 0 && event.guestCount > 0 && event.attendees.length > 0;
+
+                return (
+                  <article
+                    className="admin-event-card"
+                    key={[
+                      summary.generatedAt,
+                      event.id,
+                      event.partyCount,
+                      event.guestCount,
+                      event.attendees.length,
+                    ].join("-")}
+                  >
+                    <div className="admin-event-heading">
+                      <div>
+                        <h2>{event.title}</h2>
+                        <p>{event.date}</p>
+                      </div>
+                      <div className="admin-event-total">{event.guestCount}</div>
                     </div>
-                    <div className="admin-event-total">{event.guestCount}</div>
-                  </div>
-                  <div className="admin-event-stats">
-                    <span>{event.partyCount} parties</span>
-                    <span>{event.guestCount} guests</span>
-                  </div>
-                  <div className="admin-party-grid">
-                    {event.attendees.length ? (
-                      event.attendees.map((attendee) => (
-                        <article className="admin-party-tile" key={`${event.id}-${attendee.name}`}>
-                          <div className="admin-party-head">
-                            <strong>{attendee.name}</strong>
-                            <span>{attendee.guestCount} guests</span>
-                          </div>
-                          <p>{attendee.email || "No email"}</p>
-                        </article>
-                      ))
-                    ) : (
-                      <p className="admin-empty">No guests yet.</p>
-                    )}
-                  </div>
-                </article>
-              ))}
+                    <div className="admin-event-stats">
+                      <span>{event.partyCount} parties</span>
+                      <span>{event.guestCount} guests</span>
+                    </div>
+                    <div className="admin-party-grid">
+                      {hasAttendees ? (
+                        event.attendees.map((attendee) => (
+                          <article
+                            className="admin-party-tile"
+                            key={`${event.id}-${attendee.email}-${attendee.name}-${attendee.guestCount}`}
+                          >
+                            <div className="admin-party-head">
+                              <strong>{attendee.name}</strong>
+                              <span>{attendee.guestCount} guests</span>
+                            </div>
+                            <p>{attendee.email || "No email"}</p>
+                          </article>
+                        ))
+                      ) : (
+                        <p className="admin-empty">No guests yet.</p>
+                      )}
+                    </div>
+                  </article>
+                );
+              })}
             </div>
 
             <div className="admin-responses">
