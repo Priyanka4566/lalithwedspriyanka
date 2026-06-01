@@ -3,7 +3,29 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Priyanka & Lalith - Wedding Invitation",
-  description: "Wedding invitation for Priyanka and Lalith.",
+  description: "Join Priyanka and Lalith as they celebrate their wedding.",
+  metadataBase: new URL("https://www.lalithwedspriyanka.com"),
+  openGraph: {
+    title: "Priyanka & Lalith - Wedding Invitation",
+    description: "Join Priyanka and Lalith as they celebrate their wedding.",
+    url: "https://www.lalithwedspriyanka.com",
+    siteName: "Priyanka & Lalith Wedding",
+    images: [
+      {
+        url: "/link-preview.png",
+        width: 941,
+        height: 1672,
+        alt: "Priyanka and Lalith wedding portrait",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Priyanka & Lalith - Wedding Invitation",
+    description: "Join Priyanka and Lalith as they celebrate their wedding.",
+    images: ["/link-preview.png"],
+  },
 };
 
 export default function RootLayout({
