@@ -45,6 +45,19 @@ export function EventSection({ event }: EventSectionProps) {
           {event.extraBlessing ? (
             <p className="event-extra-blessing">{event.extraBlessing}</p>
           ) : null}
+<<<<<<< HEAD
+=======
+          {event.image ? (
+            <div className="event-image-wrapper">
+              <img
+                src={event.image.src}
+                alt={event.image.alt}
+                className="event-image"
+                style={{ width: "100%", borderRadius: "12px", marginTop: "1.5rem", display: "block" }}
+              />
+            </div>
+          ) : null}
+>>>>>>> b0db782 (updated invite)
         </div>
       </div>
     </section>

@@ -81,7 +81,11 @@ body {
 .envelope-wrap {
   isolation: isolate;
   position: relative;
+<<<<<<< HEAD
   width: min(380px, 85vw);
+=======
+  width: min(420px, 88vw);
+>>>>>>> b0db782 (updated invite)
   animation: envelopeFloat 3s ease-in-out infinite;
   backface-visibility: hidden;
   transform: translate3d(0, 0, 0);
@@ -98,6 +102,40 @@ body {
   opacity: 0.95;
   transform: translate3d(0, 0, 0);
 }
+<<<<<<< HEAD
+=======
+.cover-logo-wrap {
+  position: relative;
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 0 0 1.5px rgba(201,168,76,0.6), 0 24px 60px rgba(0,0,0,0.35);
+}
+.cover-logo-img {
+  width: 100%;
+  display: block;
+  border-radius: 16px;
+}
+
+.wax-seal {
+  position: absolute;
+  top: 59.6%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px; height: 120px;
+  animation: sealPulse 2s ease-in-out infinite;
+  backface-visibility: hidden;
+  filter: drop-shadow(0 0 18px rgba(201,168,76,0.7));
+  transform-origin: center;
+  will-change: transform;
+  z-index: 2;
+  border-radius: 50%;
+  overflow: hidden;
+}
+@keyframes sealPulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.04); }
+}
+>>>>>>> b0db782 (updated invite)
 @keyframes envelopeFloat {
   0%, 100% { transform: translate3d(0, 0, 0); }
   50% { transform: translate3d(0, -12px, 0); }
@@ -119,6 +157,7 @@ body {
   transform: translate3d(0, 0, 0);
 }
 
+<<<<<<< HEAD
 .wax-seal {
   position: absolute;
   top: 50%; left: 50%;
@@ -142,6 +181,15 @@ body {
   font-size: clamp(1rem, 3vw, 1.3rem);
   letter-spacing: 0.3em;
   text-transform: uppercase;
+=======
+.tap-text {
+  color: var(--gold-light);
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(1.1rem, 3.5vw, 1.6rem);
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  font-weight: 400;
+>>>>>>> b0db782 (updated invite)
   animation: tapPulse 1.8s ease-in-out infinite;
   text-align: center;
 }
@@ -150,6 +198,21 @@ body {
   50% { opacity: 1; }
 }
 
+<<<<<<< HEAD
+=======
+.wedding-invitation-text {
+  color: var(--gold-light);
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(1.1rem, 3.5vw, 1.6rem);
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: 400;
+  animation: tapPulse 1.8s ease-in-out infinite;
+  animation-delay: 0.9s;
+}
+
+>>>>>>> b0db782 (updated invite)
 .env-glow {
   position: absolute;
   width: 500px; height: 500px;
@@ -168,7 +231,12 @@ body {
 
 #envelope-screen.opening .particles-bg,
 #envelope-screen.opening .env-glow,
+<<<<<<< HEAD
 #envelope-screen.opening .tap-text {
+=======
+#envelope-screen.opening .tap-text,
+#envelope-screen.opening .wedding-invitation-text {
+>>>>>>> b0db782 (updated invite)
   opacity: 0;
 }
 
@@ -231,6 +299,17 @@ body {
   animation: symbolFloat 4s ease-in-out infinite;
 }
 .hero-swastik { animation-delay: 1s; }
+<<<<<<< HEAD
+=======
+.hero-symbol-img {
+  width: clamp(2.5rem, 6vw, 4rem);
+  height: clamp(2.5rem, 6vw, 4rem);
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 2px 12px rgba(201,168,76,0.5));
+}
+/* Keep original colors from the uploaded images — no color override */
+>>>>>>> b0db782 (updated invite)
 @keyframes symbolFloat {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-8px); }
@@ -293,7 +372,11 @@ body {
   letter-spacing: 0.02em;
 }
 .couple-and {
+<<<<<<< HEAD
   font-family: 'Cormorant Garamond', serif;
+=======
+  font-family: 'Great Vibes', cursive;
+>>>>>>> b0db782 (updated invite)
   font-size: clamp(1.5rem, 4vw, 2.2rem);
   color: var(--sage);
   font-style: italic;
@@ -466,7 +549,11 @@ body {
   text-align: left;
 }
 .outfit-guide h4 {
+<<<<<<< HEAD
   font-family: 'Cormorant Garamond', serif;
+=======
+  font-family: 'Montserrat', sans-serif;
+>>>>>>> b0db782 (updated invite)
   font-size: 0.9rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -480,6 +567,7 @@ body {
   align-items: start;
 }
 .outfit-col {
+<<<<<<< HEAD
   font-size: 0.8rem;
   letter-spacing: 0.05em;
   line-height: 1.8;
@@ -491,6 +579,19 @@ body {
   letter-spacing: 0.05em;
   line-height: 1.8;
   font-family: 'Montserrat', sans-serif;
+=======
+  font-size: 1.15rem;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+}
+.outfit-col p {
+  font-size: 1.15rem;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  font-family: 'Cormorant Garamond', serif;
+>>>>>>> b0db782 (updated invite)
   font-weight: 300;
 }
 .outfit-col strong {
@@ -534,7 +635,11 @@ body {
   pointer-events: none;
 }
 .venue-quote {
+<<<<<<< HEAD
   font-family: 'Cormorant Garamond', serif;
+=======
+  font-family: 'Great Vibes', cursive;
+>>>>>>> b0db782 (updated invite)
   font-size: clamp(1rem, 2.5vw, 1.2rem);
   font-style: italic;
   color: #5A4030;
@@ -569,11 +674,19 @@ body {
   min-height: 44px;
   padding: 0.75rem 1.8rem;
   border-radius: 50px;
+<<<<<<< HEAD
   font-size: 0.75rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   text-decoration: none;
   font-family: 'Montserrat', sans-serif;
+=======
+  font-size: 1.1rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-family: 'Great Vibes', cursive;
+>>>>>>> b0db782 (updated invite)
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -647,14 +760,22 @@ body {
   margin-bottom: 1rem;
 }
 .travel-card h3 {
+<<<<<<< HEAD
   font-family: 'Cormorant Garamond', serif;
+=======
+  font-family: 'Great Vibes', cursive;
+>>>>>>> b0db782 (updated invite)
   font-size: 1.2rem;
   color: var(--sage-dark);
   margin-bottom: 0.5rem;
   font-weight: 500;
 }
 .travel-card p {
+<<<<<<< HEAD
   font-size: 0.82rem;
+=======
+  font-size: 1.15rem;
+>>>>>>> b0db782 (updated invite)
   color: #4A5A4A;
   line-height: 1.7;
   font-weight: 300;
@@ -662,7 +783,11 @@ body {
 .travel-card .btn {
   align-self: flex-start;
   margin-top: auto;
+<<<<<<< HEAD
   font-size: 0.65rem;
+=======
+  font-size: 1rem;
+>>>>>>> b0db782 (updated invite)
   padding: 0.5rem 1.2rem;
 }
 .travel-button {
@@ -712,7 +837,11 @@ body {
 .form-group { margin-bottom: 1.25rem; text-align: left; }
 .form-label {
   display: block;
+<<<<<<< HEAD
   font-size: 0.65rem;
+=======
+  font-size: 1rem;
+>>>>>>> b0db782 (updated invite)
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--sage-dark);
@@ -726,8 +855,13 @@ body {
   border: 1px solid rgba(201,168,76,0.3);
   border-radius: 10px;
   background: rgba(255,255,255,0.7);
+<<<<<<< HEAD
   font-family: 'Montserrat', sans-serif;
   font-size: 0.85rem;
+=======
+  font-family: 'Great Vibes', cursive;
+  font-size: 1.2rem;
+>>>>>>> b0db782 (updated invite)
   line-height: 1.4;
   color: #2A1A0A;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
@@ -759,7 +893,11 @@ body {
 }
 .rsvp-option:hover { background: rgba(201,168,76,0.08); border-color: var(--gold); }
 .rsvp-option input[type="radio"] { accent-color: var(--gold); width: 16px; height: 16px; }
+<<<<<<< HEAD
 .rsvp-option span { font-size: 0.85rem; color: #3A2010; cursor: pointer; font-weight: 300; }
+=======
+.rsvp-option span { font-size: 1.2rem; color: #3A2010; cursor: pointer; font-weight: 300; }
+>>>>>>> b0db782 (updated invite)
 .rsvp-response-panel {
   animation: fadeUp 0.45s ease;
 }
@@ -790,7 +928,11 @@ body {
   border-radius: 10px;
   background: rgba(255,255,255,0.75);
   color: #3A2010;
+<<<<<<< HEAD
   font-family: 'Montserrat', sans-serif;
+=======
+  font-family: 'Great Vibes', cursive;
+>>>>>>> b0db782 (updated invite)
   font-size: 0.78rem;
   font-weight: 400;
   line-height: 1.35;
@@ -802,7 +944,11 @@ body {
 }
 .event-tile-title {
   display: block;
+<<<<<<< HEAD
   font-size: 0.8rem;
+=======
+  font-size: 1.15rem;
+>>>>>>> b0db782 (updated invite)
   line-height: 1.35;
   color: #3A2010;
   text-align: center;
@@ -836,7 +982,11 @@ body {
   color: #FFF8E1;
   border: none;
   border-radius: 50px;
+<<<<<<< HEAD
   font-family: 'Cormorant Garamond', serif;
+=======
+  font-family: 'Great Vibes', cursive;
+>>>>>>> b0db782 (updated invite)
   font-size: 1.2rem;
   letter-spacing: 0.1em;
   cursor: pointer;
@@ -847,7 +997,11 @@ body {
 .rsvp-error {
   margin-top: 1rem;
   color: #8A2634;
+<<<<<<< HEAD
   font-size: 0.8rem;
+=======
+  font-size: 1.15rem;
+>>>>>>> b0db782 (updated invite)
   line-height: 1.5;
   text-align: center;
 }
@@ -858,7 +1012,11 @@ body {
   background: rgba(154,37,54,0.07);
   padding: 0.9rem;
   color: #4A1E25;
+<<<<<<< HEAD
   font-size: 0.82rem;
+=======
+  font-size: 1.15rem;
+>>>>>>> b0db782 (updated invite)
   line-height: 1.55;
 }
 .rsvp-duplicate strong {
@@ -1077,7 +1235,11 @@ footer::before {
 .admin-meta {
   margin-bottom: 1rem;
   color: #5A5A60;
+<<<<<<< HEAD
   font-size: 0.85rem;
+=======
+  font-size: 1.2rem;
+>>>>>>> b0db782 (updated invite)
 }
 .admin-error { color: #9A2536; }
 .admin-metrics {
@@ -1108,7 +1270,11 @@ footer::before {
   text-transform: uppercase;
 }
 .admin-metric strong {
+<<<<<<< HEAD
   font-family: 'Cormorant Garamond', serif;
+=======
+  font-family: 'Great Vibes', cursive;
+>>>>>>> b0db782 (updated invite)
   font-size: 2.5rem;
   line-height: 1;
   color: #1D1D1F;
@@ -1141,7 +1307,11 @@ footer::before {
 .admin-event-heading p {
   margin: 0.3rem 0 0;
   color: #6D6D72;
+<<<<<<< HEAD
   font-size: 0.75rem;
+=======
+  font-size: 1.1rem;
+>>>>>>> b0db782 (updated invite)
 }
 .admin-event-total {
   font-family: 'Cormorant Garamond', serif;
@@ -1223,7 +1393,11 @@ footer::before {
   color: #9A2536;
   cursor: pointer;
   font: inherit;
+<<<<<<< HEAD
   font-size: 0.82rem;
+=======
+  font-size: 1.15rem;
+>>>>>>> b0db782 (updated invite)
 }
 .admin-delete:disabled {
   cursor: not-allowed;

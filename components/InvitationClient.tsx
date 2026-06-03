@@ -2,7 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { EnvelopeReveal, type DecorativeParticle } from "./EnvelopeReveal";
+<<<<<<< HEAD
 import { EventSection } from "./EventSection";
+=======
+import { EventImageSection } from "./EventImageSection";
+>>>>>>> b0db782 (updated invite)
 import { Footer } from "./Footer";
 import { Hero } from "./Hero";
 import { RSVPForm } from "./RSVPForm";
@@ -130,7 +134,11 @@ export default function InvitationClient() {
         <Hero countdown={countdown} particles={heroParticles} />
 
         {weddingEvents.map((event) => (
+<<<<<<< HEAD
           <EventSection event={event} key={event.id} />
+=======
+          <EventImageSection event={event} key={event.id} />
+>>>>>>> b0db782 (updated invite)
         ))}
 
         <VenueSection />
