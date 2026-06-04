@@ -45,8 +45,6 @@ export function EventSection({ event }: EventSectionProps) {
           {event.extraBlessing ? (
             <p className="event-extra-blessing">{event.extraBlessing}</p>
           ) : null}
-<<<<<<< HEAD
-=======
           {event.image ? (
             <div className="event-image-wrapper">
               <img
@@ -57,7 +55,6 @@ export function EventSection({ event }: EventSectionProps) {
               />
             </div>
           ) : null}
->>>>>>> b0db782 (updated invite)
         </div>
       </div>
     </section>

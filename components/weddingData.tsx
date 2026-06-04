@@ -30,10 +30,7 @@ export type WeddingEvent = {
   outfitTitle: string;
   outfitColumns: OutfitColumn[];
   extraBlessing?: string;
-<<<<<<< HEAD
-=======
   image?: { src: string; alt: string };
->>>>>>> b0db782 (updated invite)
   styles: EventStyleSet;
 };
 
@@ -58,16 +55,9 @@ export const weddingEvents: WeddingEvent[] = [
         lines: ["Yellow sarees", "Lehengas · Floral attire", "Marigold tones preferred"],
       },
     ],
-<<<<<<< HEAD
-    styles: {
-      title: { color: "#7A4F00" },
-      date: { color: "#5A3700" },
-      divider: { color: "#B8860B" },
-=======
     extraBlessing: undefined,
     image: { src: "/haldi.jpeg", alt: "Haldi Ceremony" },
     styles: {
->>>>>>> b0db782 (updated invite)
       description: { color: "#4A3500" },
       outfitGuide: {
         background: "rgba(255,200,0,0.1)",
@@ -99,10 +89,7 @@ export const weddingEvents: WeddingEvent[] = [
       },
     ],
     extraBlessing: "శుభం భవతు ✦ కళ్యాణమస్తు",
-<<<<<<< HEAD
-=======
     image: { src: "/wedding_ceremony.jpeg", alt: "Wedding Ceremony" },
->>>>>>> b0db782 (updated invite)
     styles: {
       title: { color: "#6B2D3A" },
       date: { color: "#5A4030" },
@@ -144,11 +131,7 @@ export const travelCards = [
   },
   {
     icon: "🏡",
-<<<<<<< HEAD
-    title: "Guest Home Location",
-=======
     title: "Our Home Location",
->>>>>>> b0db782 (updated invite)
     body: (
       <>
         <strong>1325 Bellweather Dr</strong>
@@ -156,11 +139,7 @@ export const travelCards = [
         Greenwood, Indiana
         <br />
         <br />
-<<<<<<< HEAD
-        Family home for our out-of-town guests. We welcome you with open hearts.
-=======
         Your presence is the greatest gift, and we look forward to seeing you before the wedding to share laughter, joy, and special moments together ❤️
->>>>>>> b0db782 (updated invite)
       </>
     ),
     cta: "Navigate Here",

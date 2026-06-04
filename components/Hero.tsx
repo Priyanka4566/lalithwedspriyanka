@@ -35,17 +35,12 @@ export function Hero({ countdown, particles }: HeroProps) {
       <HeroFloral position="top" />
 
       <div className="hero-symbols" aria-hidden="true">
-<<<<<<< HEAD
-        <div className="hero-om">ॐ</div>
-        <div className="hero-swastik">卐</div>
-=======
         <div className="hero-om">
           <img src="/om-symbol.png" alt="Om" className="hero-symbol-img hero-om-img" />
         </div>
         <div className="hero-swastik">
           <img src="/swastik-symbol.png" alt="Swastik" className="hero-symbol-img hero-swastik-img" />
         </div>
->>>>>>> b0db782 (updated invite)
       </div>
 
       <div className="hero-content">
@@ -62,11 +57,7 @@ export function Hero({ countdown, particles }: HeroProps) {
         </div>
 
         <div className="couple-names">Priyanka</div>
-<<<<<<< HEAD
-        <div className="couple-and">&amp;</div>
-=======
         <div className="couple-and">weds</div>
->>>>>>> b0db782 (updated invite)
         <div className="couple-names">Lalith</div>
 
         <div className="ornament-line">
