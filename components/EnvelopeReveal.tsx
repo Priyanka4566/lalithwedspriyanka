@@ -60,7 +60,11 @@ export function EnvelopeReveal({
       </div>
       <div className="env-glow" aria-hidden="true" />
       <div className="envelope-container">
-        <p className="wedding-invitation-text">✦ &nbsp;WEDDING INVITATION&nbsp; ✦</p>
+        <p className="wedding-invitation-text">
+          <span aria-hidden="true">✦</span>
+          <span>Wedding Invitation</span>
+          <span aria-hidden="true">✦</span>
+        </p>
         <div
           className={`envelope-wrap${isOpening ? " opening-anim" : ""}`}
           id="envelopeWrap"
@@ -68,7 +72,11 @@ export function EnvelopeReveal({
           <EnvelopeSvg />
           <WaxSeal />
         </div>
-        <p className="tap-text">✦ &nbsp;TAP TO REVEAL&nbsp; ✦</p>
+        <p className="tap-text">
+          <span aria-hidden="true">✦</span>
+          <span>Tap to Reveal</span>
+          <span aria-hidden="true">✦</span>
+        </p>
       </div>
     </div>
   );
