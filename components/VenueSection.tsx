@@ -3,19 +3,33 @@ export function VenueSection() {
     <section className="section venue-section">
       <div className="section-inner">
         <div className="venue-card">
+<<<<<<< HEAD
           <div className="section-label venue-label">The Celebration Venue</div>
           <p className="venue-quote">
             &quot;With the blessings of our beloved parents, we invite you to celebrate
             this most special day with us.&quot;
+=======
+          <div className="section-label venue-label">Rings &amp; Rhythms Celebration Venue</div>
+          <p className="venue-quote">
+            Join us for an evening filled with love, music, and celebration.💃🏻💍🕺🏻
+>>>>>>> c5eaedb (Sangeet & Haldi invite)
           </p>
           <div className="ornament-line">
             <span className="ornament-diamond">❖</span>
           </div>
+<<<<<<< HEAD
           <div className="venue-name">The Maharaja Palace</div>
           <div className="venue-address">Indianapolis, Indiana</div>
           <div className="btn-group">
             <a
               href="https://maps.google.com/?q=The+Maharaja+Palace+Indianapolis+Indiana"
+=======
+          <div className="venue-name">Arlington Farms Community Hall</div>
+          <div className="venue-address">2755 Red Bloom Dr, Greenwood, IN 46143</div>
+          <div className="btn-group">
+            <a
+              href="https://maps.google.com/?q=2755+Red+Bloom+Dr+Greenwood+IN+46143"
+>>>>>>> c5eaedb (Sangeet & Haldi invite)
               target="_blank"
               rel="noreferrer"
               className="btn btn-gold"
@@ -23,7 +37,11 @@ export function VenueSection() {
               🗺 Navigate to Venue
             </a>
             <a
+<<<<<<< HEAD
               href="https://maps.google.com/?q=The+Maharaja+Palace+Indianapolis+Indiana"
+=======
+              href="https://maps.google.com/?q=2755+Red+Bloom+Dr+Greenwood+IN+46143"
+>>>>>>> c5eaedb (Sangeet & Haldi invite)
               target="_blank"
               rel="noreferrer"
               className="btn btn-outline"

@@ -4,10 +4,18 @@ import { useEffect, useState } from "react";
 import { EnvelopeReveal, type DecorativeParticle } from "./EnvelopeReveal";
 import { EventImageSection } from "./EventImageSection";
 import { Footer } from "./Footer";
+<<<<<<< HEAD
 import { Hero } from "./Hero";
 import { RSVPForm } from "./RSVPForm";
 import { TravelSection } from "./TravelSection";
 import { VenueSection } from "./VenueSection";
+=======
+import { RingsRhythmsHero } from "./RingsRhythmsHero";
+import { RSVPForm } from "./RSVPForm";
+import { TravelSection } from "./TravelSection";
+import { VenueSection } from "./VenueSection";
+import { HaldiVenueSection } from "./HaldiVenueSection";
+>>>>>>> c5eaedb (Sangeet & Haldi invite)
 import { weddingEvents } from "./weddingData";
 
 const FORM_SUBMIT_ENDPOINT =
@@ -127,13 +135,21 @@ export default function InvitationClient() {
       />
 
       <div id="main-site" className={mainVisible ? "visible" : ""}>
+<<<<<<< HEAD
         <Hero countdown={countdown} particles={heroParticles} />
+=======
+        <RingsRhythmsHero />
+>>>>>>> c5eaedb (Sangeet & Haldi invite)
 
         {weddingEvents.map((event) => (
           <EventImageSection event={event} key={event.id} />
         ))}
 
         <VenueSection />
+<<<<<<< HEAD
+=======
+        <HaldiVenueSection />
+>>>>>>> c5eaedb (Sangeet & Haldi invite)
         <TravelSection />
         <RSVPForm endpoint={FORM_SUBMIT_ENDPOINT} />
         <Footer />

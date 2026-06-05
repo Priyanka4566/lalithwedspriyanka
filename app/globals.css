@@ -152,14 +152,33 @@ body {
 
 .tap-text {
   color: var(--gold-light);
+<<<<<<< HEAD
   font-family: 'Great Vibes', cursive;
   font-size: clamp(1.1rem, 3.5vw, 1.6rem);
   letter-spacing: 0.45em;
+=======
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(1.1rem, 3.5vw, 1.6rem);
+  letter-spacing: 0.18em;
+>>>>>>> c5eaedb (Sangeet & Haldi invite)
   text-transform: uppercase;
   font-weight: 400;
   animation: tapPulse 1.8s ease-in-out infinite;
   text-align: center;
 }
+<<<<<<< HEAD
+=======
+.tap-text,
+.wedding-invitation-text {
+  width: min(100%, 520px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.55rem, 2.8vw, 1rem);
+  padding-inline: 1rem;
+  white-space: nowrap;
+}
+>>>>>>> c5eaedb (Sangeet & Haldi invite)
 @keyframes tapPulse {
   0%, 100% { opacity: 0.6; }
   50% { opacity: 1; }
@@ -167,9 +186,15 @@ body {
 
 .wedding-invitation-text {
   color: var(--gold-light);
+<<<<<<< HEAD
   font-family: 'Great Vibes', cursive;
   font-size: clamp(1.1rem, 3.5vw, 1.6rem);
   letter-spacing: 0.45em;
+=======
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(1.1rem, 3.5vw, 1.6rem);
+  letter-spacing: 0.18em;
+>>>>>>> c5eaedb (Sangeet & Haldi invite)
   text-transform: uppercase;
   text-align: center;
   font-weight: 400;
@@ -404,6 +429,14 @@ body {
 }
 
 /* ===== SECTION COMMON ===== */
+<<<<<<< HEAD
+=======
+/* Consistent page-to-page gap */
+.section + .section {
+  margin-top: 0;
+}
+
+>>>>>>> c5eaedb (Sangeet & Haldi invite)
 .section {
   min-height: 100svh;
   position: relative;
@@ -447,7 +480,11 @@ body {
   text-align: center;
 }
 .section-title {
+<<<<<<< HEAD
   font-family: 'Great Vibes', cursive;
+=======
+  font-family: 'Montserrat', sans-serif;
+>>>>>>> c5eaedb (Sangeet & Haldi invite)
   font-size: clamp(2.5rem, 7vw, 4.5rem);
   line-height: 1.15;
   margin-bottom: 0.5rem;
@@ -460,9 +497,28 @@ body {
 }
 
 /* ===== EVENT SECTIONS ===== */
+<<<<<<< HEAD
 /* Haldi */
 .haldi-section {
   background: linear-gradient(135deg, #FFF8E1 0%, #FFF3B0 40%, #FFE57A 100%);
+=======
+/* Sangeeth */
+.sangeeth-section {
+  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 40%, #4338ca 100%);
+}
+.sangeeth-section .section-title { color: #e0d7ff; }
+.sangeeth-section .section-label { color: #a5b4fc; }
+.sangeeth-section .section-date { color: #c7d2fe; }
+.sangeeth-section .event-card {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(165,180,252,0.3);
+}
+
+/* Haldi */
+.haldi-section {
+  background: linear-gradient(135deg, #FFF8E1 0%, #FFF3B0 40%, #FFE57A 100%);
+  min-height: unset;
+>>>>>>> c5eaedb (Sangeet & Haldi invite)
 }
 .haldi-section .section-title { color: #7A4F00; }
 .haldi-section .section-label { color: #B8860B; }
@@ -570,7 +626,11 @@ body {
   pointer-events: none;
 }
 .venue-quote {
+<<<<<<< HEAD
   font-family: 'Great Vibes', cursive;
+=======
+  font-family: 'Montserrat', sans-serif;
+>>>>>>> c5eaedb (Sangeet & Haldi invite)
   font-size: clamp(1rem, 2.5vw, 1.2rem);
   font-style: italic;
   color: #5A4030;
@@ -579,10 +639,20 @@ body {
   margin: 0 auto 2rem;
 }
 .venue-name {
+<<<<<<< HEAD
   font-family: 'Great Vibes', cursive;
   font-size: clamp(2rem, 6vw, 3.5rem);
   color: var(--gold-dark);
   margin-bottom: 0.3rem;
+=======
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: 500;
+  font-style: italic;
+  color: var(--gold-dark);
+  margin-bottom: 0.3rem;
+  line-height: 1.2;
+>>>>>>> c5eaedb (Sangeet & Haldi invite)
 }
 .venue-address {
   font-family: 'Cormorant Garamond', serif;
@@ -609,7 +679,11 @@ body {
   letter-spacing: 0.15em;
   text-transform: uppercase;
   text-decoration: none;
+<<<<<<< HEAD
   font-family: 'Great Vibes', cursive;
+=======
+  font-family: 'Montserrat', sans-serif;
+>>>>>>> c5eaedb (Sangeet & Haldi invite)
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -629,6 +703,27 @@ body {
 }
 .btn-outline:hover { background: rgba(201,168,76,0.1); transform: translateY(-2px); }
 
+<<<<<<< HEAD
+=======
+/* ===== HALDI VENUE ===== */
+.haldi-venue-section {
+  background: linear-gradient(135deg, #FFF8E1 0%, #FFF3B0 40%, #FFE57A 100%);
+}
+.haldi-venue-label {
+  color: #B8860B;
+}
+.haldi-venue-card {
+  border-color: rgba(255,180,0,0.35);
+  box-shadow: 0 20px 60px rgba(184,134,11,0.12);
+}
+.haldi-venue-card::before {
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='8' fill='none' stroke='%23C9A84C' stroke-width='0.3' opacity='0.18'/%3E%3C/svg%3E") repeat;
+}
+.haldi-venue-quote {
+  color: #4A3500;
+}
+
+>>>>>>> c5eaedb (Sangeet & Haldi invite)
 /* ===== TRAVEL ===== */
 .travel-section {
   background: linear-gradient(180deg, #EAF0E8 0%, #E0EAD8 100%);
@@ -636,9 +731,17 @@ body {
 .travel-label { color: var(--sage-dark); }
 .travel-title {
   font-family: 'Great Vibes', cursive;
+<<<<<<< HEAD
   font-size: clamp(2.5rem, 7vw, 4rem);
   color: var(--sage-dark);
   margin-bottom: 0.5rem;
+=======
+  font-size: clamp(3rem, 8vw, 5rem);
+  font-weight: 400;
+  color: var(--sage-dark);
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+>>>>>>> c5eaedb (Sangeet & Haldi invite)
 }
 .travel-subtitle {
   font-family: 'Cormorant Garamond', serif;
@@ -683,7 +786,11 @@ body {
   margin-bottom: 1rem;
 }
 .travel-card h3 {
+<<<<<<< HEAD
   font-family: 'Great Vibes', cursive;
+=======
+  font-family: 'Montserrat', sans-serif;
+>>>>>>> c5eaedb (Sangeet & Haldi invite)
   font-size: 1.2rem;
   color: var(--sage-dark);
   margin-bottom: 0.5rem;
@@ -732,9 +839,17 @@ body {
 }
 .rsvp-title {
   font-family: 'Great Vibes', cursive;
+<<<<<<< HEAD
   font-size: clamp(2.5rem, 7vw, 4rem);
   color: var(--gold-dark);
   margin-bottom: 0.3rem;
+=======
+  font-size: clamp(3rem, 8vw, 5rem);
+  font-weight: 400;
+  color: var(--gold-dark);
+  margin-bottom: 0.3rem;
+  line-height: 1.2;
+>>>>>>> c5eaedb (Sangeet & Haldi invite)
 }
 .rsvp-subtitle {
   font-family: 'Cormorant Garamond', serif;
@@ -762,7 +877,11 @@ body {
   border: 1px solid rgba(201,168,76,0.3);
   border-radius: 10px;
   background: rgba(255,255,255,0.7);
+<<<<<<< HEAD
   font-family: 'Great Vibes', cursive;
+=======
+  font-family: 'Montserrat', sans-serif;
+>>>>>>> c5eaedb (Sangeet & Haldi invite)
   font-size: 1.2rem;
   line-height: 1.4;
   color: #2A1A0A;
@@ -826,7 +945,11 @@ body {
   border-radius: 10px;
   background: rgba(255,255,255,0.75);
   color: #3A2010;
+<<<<<<< HEAD
   font-family: 'Great Vibes', cursive;
+=======
+  font-family: 'Montserrat', sans-serif;
+>>>>>>> c5eaedb (Sangeet & Haldi invite)
   font-size: 0.78rem;
   font-weight: 400;
   line-height: 1.35;
@@ -838,8 +961,13 @@ body {
 }
 .event-tile-title {
   display: block;
+<<<<<<< HEAD
   font-size: 1.15rem;
   line-height: 1.35;
+=======
+  font-size: 0.95rem;
+  line-height: 1.3;
+>>>>>>> c5eaedb (Sangeet & Haldi invite)
   color: #3A2010;
   text-align: center;
 }
@@ -872,7 +1000,11 @@ body {
   color: #FFF8E1;
   border: none;
   border-radius: 50px;
+<<<<<<< HEAD
   font-family: 'Great Vibes', cursive;
+=======
+  font-family: 'Montserrat', sans-serif;
+>>>>>>> c5eaedb (Sangeet & Haldi invite)
   font-size: 1.2rem;
   letter-spacing: 0.1em;
   cursor: pointer;
@@ -958,7 +1090,11 @@ body {
   100% { transform: scale(1); opacity: 1; }
 }
 .success-title {
+<<<<<<< HEAD
   font-family: 'Great Vibes', cursive;
+=======
+  font-family: 'Montserrat', sans-serif;
+>>>>>>> c5eaedb (Sangeet & Haldi invite)
   font-size: 2.2rem;
   color: var(--gold-dark);
   margin-bottom: 0.5rem;
@@ -1004,7 +1140,11 @@ footer::before {
   background: linear-gradient(to right, transparent, var(--gold), transparent);
 }
 .footer-text {
+<<<<<<< HEAD
   font-family: 'Great Vibes', cursive;
+=======
+  font-family: 'Montserrat', sans-serif;
+>>>>>>> c5eaedb (Sangeet & Haldi invite)
   font-size: clamp(2rem, 5vw, 3rem);
   color: var(--gold-light);
   margin-bottom: 0.5rem;
@@ -1144,7 +1284,11 @@ footer::before {
   text-transform: uppercase;
 }
 .admin-metric strong {
+<<<<<<< HEAD
   font-family: 'Great Vibes', cursive;
+=======
+  font-family: 'Montserrat', sans-serif;
+>>>>>>> c5eaedb (Sangeet & Haldi invite)
   font-size: 2.5rem;
   line-height: 1;
   color: #1D1D1F;
@@ -1232,6 +1376,50 @@ footer::before {
 .admin-empty {
   margin: 0;
 }
+<<<<<<< HEAD
+=======
+.admin-alcohol-card {
+  margin-top: 1.5rem;
+}
+.admin-alcohol-meter {
+  margin-top: 1rem;
+}
+.admin-alcohol-bar-wrap {
+  display: flex;
+  height: 12px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #e5e7eb;
+  width: 100%;
+}
+.admin-alcohol-bar {
+  height: 100%;
+  transition: width 0.5s ease;
+}
+.admin-alcohol-bar-yes {
+  background: linear-gradient(90deg, #C9A84C, #E8C97A);
+}
+.admin-alcohol-bar-no {
+  background: linear-gradient(90deg, #6B7280, #9CA3AF);
+}
+.admin-alcohol-legend {
+  display: flex;
+  gap: 1.25rem;
+  margin-top: 0.6rem;
+  font-size: 0.8rem;
+  color: #4A4A4A;
+}
+.admin-alcohol-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+.dot-yes { background: #C9A84C; }
+.dot-no { background: #6B7280; }
+>>>>>>> c5eaedb (Sangeet & Haldi invite)
 .admin-responses {
   padding: 1.2rem;
   overflow: hidden;
@@ -1338,6 +1526,10 @@ footer::before {
   .section {
     min-height: auto;
   }
+<<<<<<< HEAD
+=======
+  .sangeeth-section .event-card,
+>>>>>>> c5eaedb (Sangeet & Haldi invite)
   .haldi-section .event-card,
   .wedding-section .event-card,
   .venue-card, .rsvp-card { padding: 1.5rem; }
@@ -1379,6 +1571,22 @@ footer::before {
   .event-tile {
     min-height: 52px;
   }
+<<<<<<< HEAD
+=======
+  .tap-text,
+  .wedding-invitation-text {
+    width: 100%;
+    gap: 0.5rem;
+    padding-inline: 0.75rem;
+    letter-spacing: 0.12em;
+  }
+  .wedding-invitation-text {
+    font-size: clamp(0.78rem, 3.6vw, 1rem);
+  }
+  .tap-text {
+    font-size: clamp(0.82rem, 3.8vw, 1.05rem);
+  }
+>>>>>>> c5eaedb (Sangeet & Haldi invite)
   .admin-header {
     flex-direction: column;
   }
@@ -1412,6 +1620,30 @@ footer::before {
 /* Next.js migration additions */
 .hero-ganesha-watermark { background-image: url("/ganesha-watermark.jpg"); }
 .rsvp-option.selected { border-color: var(--gold); background: rgba(201,168,76,0.08); }
+<<<<<<< HEAD
+=======
+
+/* Alcohol preference */
+.alcohol-pref-box {
+  margin-top: 1.25rem;
+}
+.alcohol-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem;
+}
+.alcohol-option {
+  min-height: 44px;
+  justify-content: center;
+  text-align: center;
+  padding: 0.65rem 0.75rem;
+}
+@media (max-width: 480px) {
+  .alcohol-options {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+>>>>>>> c5eaedb (Sangeet & Haldi invite)
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
 }

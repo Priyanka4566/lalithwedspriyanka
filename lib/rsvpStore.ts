@@ -21,6 +21,10 @@ type SupabaseRSVP = {
   event_ids: StoredRSVP["eventIds"];
   guest_count: number;
   message: string | null;
+<<<<<<< HEAD
+=======
+  sangeet_alcohol: string | null;
+>>>>>>> c5eaedb (Sangeet & Haldi invite)
   created_at: string;
   updated_at: string;
 };
@@ -82,6 +86,10 @@ function toStoredRSVP(row: SupabaseRSVP): StoredRSVP {
     eventIds: row.event_ids,
     guestCount: row.guest_count,
     message: row.message ?? "",
+<<<<<<< HEAD
+=======
+    sangeetAlcohol: row.sangeet_alcohol === "yes" || row.sangeet_alcohol === "no" ? row.sangeet_alcohol : undefined,
+>>>>>>> c5eaedb (Sangeet & Haldi invite)
     createdAt: row.created_at,
     updatedAt: row.updated_at,
   };
@@ -102,10 +110,18 @@ async function readLocalData(): Promise<LocalDataFile> {
           ? item.status
           : "decline",
         eventIds: Array.isArray(item.eventIds)
+<<<<<<< HEAD
           ? (item.eventIds.filter((eventId) => eventId === "haldi" || eventId === "wedding") as StoredRSVP["eventIds"])
           : [],
         guestCount: Number(item.guestCount ?? 0) || 0,
         message: String(item.message ?? ""),
+=======
+          ? (item.eventIds.filter((eventId) => eventId === "sangeeth" || eventId === "haldi") as StoredRSVP["eventIds"])
+          : [],
+        guestCount: Number(item.guestCount ?? 0) || 0,
+        message: String(item.message ?? ""),
+        sangeetAlcohol: item.sangeetAlcohol === "yes" || item.sangeetAlcohol === "no" ? item.sangeetAlcohol : undefined,
+>>>>>>> c5eaedb (Sangeet & Haldi invite)
         createdAt: String(item.createdAt ?? new Date().toISOString()),
         updatedAt: String(item.updatedAt ?? new Date().toISOString()),
       })),
@@ -206,6 +222,10 @@ async function saveSupabaseRSVP(submission: RSVPSubmission): Promise<StoredRSVP>
         rsvp_event_ids: submission.eventIds,
         rsvp_guest_count: submission.guestCount,
         rsvp_message: submission.message || null,
+<<<<<<< HEAD
+=======
+        rsvp_sangeet_alcohol: submission.sangeetAlcohol ?? null,
+>>>>>>> c5eaedb (Sangeet & Haldi invite)
       }),
       cache: "no-store",
     },

@@ -36,6 +36,42 @@ export type WeddingEvent = {
 
 export const weddingEvents: WeddingEvent[] = [
   {
+<<<<<<< HEAD
+=======
+    id: "sangeeth",
+    sectionClassName: "sangeeth-section",
+    label: "An Evening of Music & Dance",
+    title: "Sangeeth",
+    date: "July 2, 2026 · 6:00 PM",
+    responseLabel: "Engagement/Sangeet — July 2",
+    description:
+      "An enchanting evening of music, dance, and love — celebrating the couple with joyful performances, laughter, and the warmth of family and friends coming together before the big day.",
+    outfitTitle: "Dress Code",
+    outfitColumns: [
+      {
+        label: "Gentlemen",
+        lines: ["Sherwanis or kurta sets", "Festive ethnic wear", "Navy / jewel tones"],
+      },
+      {
+        label: "Ladies",
+        lines: ["Lehengas or sarees", "Festive & glam attire", "Gold & dark tones preferred"],
+      },
+    ],
+    extraBlessing: undefined,
+    image: undefined,
+    styles: {
+      description: { color: "#1a1a2e" },
+      outfitGuide: {
+        background: "rgba(20,20,60,0.07)",
+        border: "1px solid rgba(100,80,180,0.25)",
+      },
+      outfitTitle: { color: "#2a1a4e" },
+      outfitColumn: { color: "#1a1a3e" },
+      outfitStrong: { color: "#3a2a6e" },
+    },
+  },
+  {
+>>>>>>> c5eaedb (Sangeet & Haldi invite)
     id: "haldi",
     sectionClassName: "haldi-section",
     label: "Sacred Turmeric Ritual",
@@ -68,6 +104,7 @@ export const weddingEvents: WeddingEvent[] = [
       outfitStrong: { color: "#8B6000" },
     },
   },
+<<<<<<< HEAD
   {
     id: "wedding",
     sectionClassName: "wedding-section",
@@ -103,6 +140,8 @@ export const weddingEvents: WeddingEvent[] = [
       outfitStrong: { color: "#6B2D3A" },
     },
   },
+=======
+>>>>>>> c5eaedb (Sangeet & Haldi invite)
 ];
 
 export const rsvpOptions: Array<{ value: RSVPStatus; label: string }> = [
@@ -138,6 +177,10 @@ export const travelCards = [
         <br />
         Greenwood, Indiana
         <br />
+<<<<<<< HEAD
+=======
+        <br />
+>>>>>>> c5eaedb (Sangeet & Haldi invite)
         Drop by, say hello, and celebrate with us before the big day!
       </>
     ),
