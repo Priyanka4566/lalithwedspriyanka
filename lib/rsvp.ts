@@ -1,10 +1,11 @@
 export const rsvpEvents = [
+  { id: "sangeeth", title: "Engagement/Sangeet", date: "July 2, 2026" },
   { id: "haldi", title: "Haldi Ceremony", date: "July 3, 2026" },
-  { id: "wedding", title: "Wedding Ceremony", date: "July 4, 2026" },
 ] as const;
 
 export type RSVPEventId = (typeof rsvpEvents)[number]["id"];
 export type RSVPStatus = "all" | "selected" | "decline";
+export type SangeetAlcohol = "yes" | "no";
 
 export type RSVPSubmission = {
   name: string;
@@ -13,6 +14,7 @@ export type RSVPSubmission = {
   eventIds: RSVPEventId[];
   guestCount: number;
   message: string;
+  sangeetAlcohol?: SangeetAlcohol;
 };
 
 export type StoredRSVP = RSVPSubmission & {
@@ -42,6 +44,10 @@ export type RSVPSummary = {
       guestCount: number;
     }>;
   }>;
+  sangeetAlcohol: {
+    yes: number;
+    no: number;
+  };
   responses: Array<{
     id: string;
     name: string;
@@ -50,6 +56,7 @@ export type RSVPSummary = {
     events: string[];
     guestCount: number;
     message: string;
+    sangeetAlcohol?: SangeetAlcohol;
     updatedAt: string;
   }>;
 };
@@ -71,6 +78,10 @@ function isRSVPStatus(value: string): value is RSVPStatus {
 
 function isRSVPEventId(value: string): value is RSVPEventId {
   return eventIds.has(value);
+}
+
+function isSangeetAlcohol(value: string): value is SangeetAlcohol {
+  return value === "yes" || value === "no";
 }
 
 export function parseRSVPSubmission(payload: unknown): RSVPSubmission {
@@ -127,6 +138,7 @@ export function parseRSVPSubmission(payload: unknown): RSVPSubmission {
       eventIds: [],
       guestCount: 0,
       message,
+      sangeetAlcohol: undefined,
     };
   }
 
@@ -135,6 +147,12 @@ export function parseRSVPSubmission(payload: unknown): RSVPSubmission {
     throw new Error("Please enter the number of guests attending");
   }
 
+  const attendingSangeeth =
+    status === "all" || eventIdsForSubmission.includes("sangeeth");
+  const rawAlcohol = readString(body.sangeetAlcohol);
+  const sangeetAlcohol =
+    attendingSangeeth && isSangeetAlcohol(rawAlcohol) ? rawAlcohol : undefined;
+
   return {
     name,
     email,
@@ -142,6 +160,7 @@ export function parseRSVPSubmission(payload: unknown): RSVPSubmission {
     eventIds: eventIdsForSubmission,
     guestCount,
     message,
+    sangeetAlcohol,
   };
 }
 
@@ -170,6 +189,16 @@ export function buildRSVPSummary(responses: StoredRSVP[]): RSVPSummary {
     };
   });
 
+  const sangeetAttendees = attendingResponses.filter((response) =>
+    response.eventIds.includes("sangeeth"),
+  );
+  const sangeetAlcoholYes = sangeetAttendees.filter(
+    (response) => response.sangeetAlcohol === "yes",
+  ).length;
+  const sangeetAlcoholNo = sangeetAttendees.filter(
+    (response) => response.sangeetAlcohol === "no",
+  ).length;
+
   return {
     generatedAt: new Date().toISOString(),
     totals: {
@@ -179,6 +208,10 @@ export function buildRSVPSummary(responses: StoredRSVP[]): RSVPSummary {
       totalGuests: attendingResponses.reduce((total, response) => total + response.guestCount, 0),
     },
     events: eventSummaries,
+    sangeetAlcohol: {
+      yes: sangeetAlcoholYes,
+      no: sangeetAlcoholNo,
+    },
     responses: responses.map((response) => ({
       id: response.id,
       name: response.name,
@@ -189,6 +222,7 @@ export function buildRSVPSummary(responses: StoredRSVP[]): RSVPSummary {
         .map((event) => event.title),
       guestCount: response.guestCount,
       message: response.message,
+      sangeetAlcohol: response.sangeetAlcohol,
       updatedAt: response.updatedAt,
     })),
   };

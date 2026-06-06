@@ -13,8 +13,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/link-preview.png",
-        width: 941,
-        height: 1672,
+        width: 1122,
+        height: 1402,
         alt: "Priyanka and Lalith wedding portrait",
       },
     ],

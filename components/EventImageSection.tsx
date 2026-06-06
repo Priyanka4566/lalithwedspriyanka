@@ -30,4 +30,3 @@ export function EventImageSection({ event }: EventImageSectionProps) {
     </section>
   );
 }
-

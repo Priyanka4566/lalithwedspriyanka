@@ -62,7 +62,7 @@ export function EnvelopeReveal({
       <div className="envelope-container">
         <p className="wedding-invitation-text">
           <span aria-hidden="true">✦</span>
-          <span>Wedding Invitation</span>
+          <span>Pre-wedding Invitation</span>
           <span aria-hidden="true">✦</span>
         </p>
         <div

@@ -36,6 +36,39 @@ export type WeddingEvent = {
 
 export const weddingEvents: WeddingEvent[] = [
   {
+    id: "sangeeth",
+    sectionClassName: "sangeeth-section",
+    label: "An Evening of Music & Dance",
+    title: "Sangeeth",
+    date: "July 2, 2026 · 6:00 PM",
+    responseLabel: "Engagement/Sangeet — July 2",
+    description:
+      "An enchanting evening of music, dance, and love — celebrating the couple with joyful performances, laughter, and the warmth of family and friends coming together before the big day.",
+    outfitTitle: "Dress Code",
+    outfitColumns: [
+      {
+        label: "Gentlemen",
+        lines: ["Sherwanis or kurta sets", "Festive ethnic wear", "Navy / jewel tones"],
+      },
+      {
+        label: "Ladies",
+        lines: ["Lehengas or sarees", "Festive & glam attire", "Gold & dark tones preferred"],
+      },
+    ],
+    extraBlessing: undefined,
+    image: undefined,
+    styles: {
+      description: { color: "#1a1a2e" },
+      outfitGuide: {
+        background: "rgba(20,20,60,0.07)",
+        border: "1px solid rgba(100,80,180,0.25)",
+      },
+      outfitTitle: { color: "#2a1a4e" },
+      outfitColumn: { color: "#1a1a3e" },
+      outfitStrong: { color: "#3a2a6e" },
+    },
+  },
+  {
     id: "haldi",
     sectionClassName: "haldi-section",
     label: "Sacred Turmeric Ritual",
@@ -66,41 +99,6 @@ export const weddingEvents: WeddingEvent[] = [
       outfitTitle: { color: "#7A4F00" },
       outfitColumn: { color: "#5A3700" },
       outfitStrong: { color: "#8B6000" },
-    },
-  },
-  {
-    id: "wedding",
-    sectionClassName: "wedding-section",
-    label: "The Sacred Union",
-    title: "Wedding Ceremony",
-    date: "July 4, 2026 · Muhurtham 10:08 AM",
-    responseLabel: "Wedding — July 4",
-    description:
-      "A sacred Telugu wedding ceremony celebrating the eternal bond blessed by Lord Ganesha. Beneath fragrant floral mandaps and the sacred fire, we take our seven vows in the presence of our beloved family and friends.",
-    outfitTitle: "Traditional Attire",
-    outfitColumns: [
-      {
-        label: "Groom",
-        lines: ["Panchakattu", "Silk dhoti", "Traditional South Indian attire"],
-      },
-      {
-        label: "Bride",
-        lines: ["Kanchipuram silk saree", "Temple jewelry", "Jasmine flowers"],
-      },
-    ],
-    extraBlessing: "శుభం భవతు ✦ కళ్యాణమస్తు",
-    image: { src: "/wedding_ceremony.jpeg", alt: "Wedding Ceremony" },
-    styles: {
-      title: { color: "#6B2D3A" },
-      date: { color: "#5A4030" },
-      description: { color: "#4A3040" },
-      outfitGuide: {
-        background: "rgba(180,100,120,0.06)",
-        border: "1px solid rgba(180,100,120,0.2)",
-      },
-      outfitTitle: { color: "#6B2D3A" },
-      outfitColumn: { color: "#4A3040" },
-      outfitStrong: { color: "#6B2D3A" },
     },
   },
 ];

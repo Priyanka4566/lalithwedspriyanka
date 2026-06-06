@@ -18,6 +18,8 @@ type RSVPFormValues = {
   message: string;
 };
 
+type SangeetAlcohol = "yes" | "no";
+
 type RSVPSubmitPayload = {
   name: string;
   email: string;
@@ -25,6 +27,7 @@ type RSVPSubmitPayload = {
   eventIds: string[];
   guestCount: number;
   message: string;
+  sangeetAlcohol?: SangeetAlcohol;
 };
 
 type ExistingRSVPDetails = {
@@ -60,6 +63,7 @@ const initialFormValues: RSVPFormValues = {
 export function RSVPForm({ endpoint }: RSVPFormProps) {
   const [status, setStatus] = useState<RSVPStatus | "">("");
   const [selectedEventIds, setSelectedEventIds] = useState<string[]>([]);
+  const [sangeetAlcohol, setSangeetAlcohol] = useState<SangeetAlcohol | "">("");
   const [formValues, setFormValues] = useState<RSVPFormValues>(initialFormValues);
   const [submitState, setSubmitState] = useState<"idle" | "loading" | "success">("idle");
   const [errorMessage, setErrorMessage] = useState("");
@@ -95,6 +99,10 @@ export function RSVPForm({ endpoint }: RSVPFormProps) {
       setSelectedEventIds([]);
     }
 
+    if (nextStatus === "decline") {
+      setSangeetAlcohol("");
+    }
+
     setFormValues((current) => {
       if (nextStatus === "decline") {
         return {
@@ -112,6 +120,9 @@ export function RSVPForm({ endpoint }: RSVPFormProps) {
 
   const selectEvent = (eventId: string) => {
     setSelectedEventIds([eventId]);
+    if (eventId !== "sangeeth") {
+      setSangeetAlcohol("");
+    }
     setDuplicateRSVP(null);
     setPendingPayload(null);
   };
@@ -205,6 +216,8 @@ export function RSVPForm({ endpoint }: RSVPFormProps) {
     const fullName = formValues.name.trim();
     const emailAddress = formValues.email.trim().toLowerCase();
     const blessings = formValues.message.trim();
+    const attendingSangeeth =
+      status === "all" || (status === "selected" && selectedEventIds.includes("sangeeth"));
 
     await submitRSVP({
       name: fullName,
@@ -213,6 +226,7 @@ export function RSVPForm({ endpoint }: RSVPFormProps) {
       eventIds: status === "selected" ? selectedEventIds : [],
       guestCount: isAttending ? Number(formValues.guests) : 0,
       message: blessings,
+      sangeetAlcohol: attendingSangeeth && sangeetAlcohol ? sangeetAlcohol : undefined,
     });
   };
 
@@ -278,6 +292,43 @@ export function RSVPForm({ endpoint }: RSVPFormProps) {
                           </button>
                           );
                         })}
+                      </div>
+                    </div>
+                  ) : null}
+
+                  {status === "all" ||
+                  (status === "selected" && selectedEventIds.includes("sangeeth")) ? (
+                    <div className="events-checkbox visible alcohol-pref-box">
+                      <p className="events-title">Alcohol Preferred</p>
+                      <div className="alcohol-options">
+                        <label
+                          className={`rsvp-option alcohol-option${
+                            sangeetAlcohol === "yes" ? " selected" : ""
+                          }`}
+                        >
+                          <input
+                            type="radio"
+                            name="sangeet-alcohol"
+                            value="yes"
+                            checked={sangeetAlcohol === "yes"}
+                            onChange={() => setSangeetAlcohol("yes")}
+                          />
+                          <span>Yes</span>
+                        </label>
+                        <label
+                          className={`rsvp-option alcohol-option${
+                            sangeetAlcohol === "no" ? " selected" : ""
+                          }`}
+                        >
+                          <input
+                            type="radio"
+                            name="sangeet-alcohol"
+                            value="no"
+                            checked={sangeetAlcohol === "no"}
+                            onChange={() => setSangeetAlcohol("no")}
+                          />
+                          <span>No</span>
+                        </label>
                       </div>
                     </div>
                   ) : null}
