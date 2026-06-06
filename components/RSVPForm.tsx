@@ -18,11 +18,8 @@ type RSVPFormValues = {
   message: string;
 };
 
-<<<<<<< HEAD
-=======
 type SangeetAlcohol = "yes" | "no";
 
->>>>>>> c5eaedb (Sangeet & Haldi invite)
 type RSVPSubmitPayload = {
   name: string;
   email: string;
@@ -30,10 +27,7 @@ type RSVPSubmitPayload = {
   eventIds: string[];
   guestCount: number;
   message: string;
-<<<<<<< HEAD
-=======
   sangeetAlcohol?: SangeetAlcohol;
->>>>>>> c5eaedb (Sangeet & Haldi invite)
 };
 
 type ExistingRSVPDetails = {
@@ -69,10 +63,7 @@ const initialFormValues: RSVPFormValues = {
 export function RSVPForm({ endpoint }: RSVPFormProps) {
   const [status, setStatus] = useState<RSVPStatus | "">("");
   const [selectedEventIds, setSelectedEventIds] = useState<string[]>([]);
-<<<<<<< HEAD
-=======
   const [sangeetAlcohol, setSangeetAlcohol] = useState<SangeetAlcohol | "">("");
->>>>>>> c5eaedb (Sangeet & Haldi invite)
   const [formValues, setFormValues] = useState<RSVPFormValues>(initialFormValues);
   const [submitState, setSubmitState] = useState<"idle" | "loading" | "success">("idle");
   const [errorMessage, setErrorMessage] = useState("");
@@ -108,13 +99,10 @@ export function RSVPForm({ endpoint }: RSVPFormProps) {
       setSelectedEventIds([]);
     }
 
-<<<<<<< HEAD
-=======
     if (nextStatus === "decline") {
       setSangeetAlcohol("");
     }
 
->>>>>>> c5eaedb (Sangeet & Haldi invite)
     setFormValues((current) => {
       if (nextStatus === "decline") {
         return {
@@ -132,10 +120,9 @@ export function RSVPForm({ endpoint }: RSVPFormProps) {
 
   const selectEvent = (eventId: string) => {
     setSelectedEventIds([eventId]);
-<<<<<<< HEAD
-=======
-    if (eventId !== "sangeeth") setSangeetAlcohol("");
->>>>>>> c5eaedb (Sangeet & Haldi invite)
+    if (eventId !== "sangeeth") {
+      setSangeetAlcohol("");
+    }
     setDuplicateRSVP(null);
     setPendingPayload(null);
   };
@@ -229,13 +216,9 @@ export function RSVPForm({ endpoint }: RSVPFormProps) {
     const fullName = formValues.name.trim();
     const emailAddress = formValues.email.trim().toLowerCase();
     const blessings = formValues.message.trim();
-
-<<<<<<< HEAD
-=======
     const attendingSangeeth =
       status === "all" || (status === "selected" && selectedEventIds.includes("sangeeth"));
 
->>>>>>> c5eaedb (Sangeet & Haldi invite)
     await submitRSVP({
       name: fullName,
       email: emailAddress,
@@ -243,10 +226,7 @@ export function RSVPForm({ endpoint }: RSVPFormProps) {
       eventIds: status === "selected" ? selectedEventIds : [],
       guestCount: isAttending ? Number(formValues.guests) : 0,
       message: blessings,
-<<<<<<< HEAD
-=======
       sangeetAlcohol: attendingSangeeth && sangeetAlcohol ? sangeetAlcohol : undefined,
->>>>>>> c5eaedb (Sangeet & Haldi invite)
     });
   };
 
@@ -316,14 +296,16 @@ export function RSVPForm({ endpoint }: RSVPFormProps) {
                     </div>
                   ) : null}
 
-<<<<<<< HEAD
-=======
-                  {/* Sangeet Alcohol Preference — shown when attending Sangeeth */}
-                  {(status === "all" || (status === "selected" && selectedEventIds.includes("sangeeth"))) ? (
+                  {status === "all" ||
+                  (status === "selected" && selectedEventIds.includes("sangeeth")) ? (
                     <div className="events-checkbox visible alcohol-pref-box">
                       <p className="events-title">Alcohol Preferred</p>
                       <div className="alcohol-options">
-                        <label className={`rsvp-option alcohol-option${sangeetAlcohol === "yes" ? " selected" : ""}`}>
+                        <label
+                          className={`rsvp-option alcohol-option${
+                            sangeetAlcohol === "yes" ? " selected" : ""
+                          }`}
+                        >
                           <input
                             type="radio"
                             name="sangeet-alcohol"
@@ -333,7 +315,11 @@ export function RSVPForm({ endpoint }: RSVPFormProps) {
                           />
                           <span>Yes</span>
                         </label>
-                        <label className={`rsvp-option alcohol-option${sangeetAlcohol === "no" ? " selected" : ""}`}>
+                        <label
+                          className={`rsvp-option alcohol-option${
+                            sangeetAlcohol === "no" ? " selected" : ""
+                          }`}
+                        >
                           <input
                             type="radio"
                             name="sangeet-alcohol"
@@ -347,7 +333,6 @@ export function RSVPForm({ endpoint }: RSVPFormProps) {
                     </div>
                   ) : null}
 
->>>>>>> c5eaedb (Sangeet & Haldi invite)
                   <div className="form-group">
                     <label className="form-label" htmlFor="rsvp-name">
                       Full Name

@@ -218,50 +218,68 @@ export function AdminDashboard() {
               })}
             </div>
 
-<<<<<<< HEAD
-=======
-            {/* Sangeet Alcohol Preference Summary */}
             <div className="admin-event-card admin-alcohol-card">
               <div className="admin-event-heading">
                 <div>
-                  <h2>Sangeet — Alcohol Preference</h2>
+                  <h2>Sangeet - Alcohol Preference</h2>
                   <p>Responses from Engagement/Sangeet attendees</p>
                 </div>
-                <div className="admin-event-total">{summary.sangeetAlcohol.yes + summary.sangeetAlcohol.no}</div>
+                <div className="admin-event-total">
+                  {summary.sangeetAlcohol.yes + summary.sangeetAlcohol.no}
+                </div>
               </div>
               <div className="admin-event-stats">
-                <span>🥂 Yes: <strong>{summary.sangeetAlcohol.yes}</strong></span>
-                <span>🚫 No: <strong>{summary.sangeetAlcohol.no}</strong></span>
+                <span>
+                  Yes: <strong>{summary.sangeetAlcohol.yes}</strong>
+                </span>
+                <span>
+                  No: <strong>{summary.sangeetAlcohol.no}</strong>
+                </span>
               </div>
               <div className="admin-alcohol-meter">
                 <div className="admin-alcohol-bar-wrap">
                   <div
                     className="admin-alcohol-bar admin-alcohol-bar-yes"
                     style={{
-                      width: summary.sangeetAlcohol.yes + summary.sangeetAlcohol.no > 0
-                        ? `${Math.round((summary.sangeetAlcohol.yes / (summary.sangeetAlcohol.yes + summary.sangeetAlcohol.no)) * 100)}%`
-                        : "0%",
+                      width:
+                        summary.sangeetAlcohol.yes + summary.sangeetAlcohol.no > 0
+                          ? `${Math.round(
+                              (summary.sangeetAlcohol.yes /
+                                (summary.sangeetAlcohol.yes + summary.sangeetAlcohol.no)) *
+                                100,
+                            )}%`
+                          : "0%",
                     }}
-                    aria-label={`${summary.sangeetAlcohol.yes} Yes responses`}
+                    aria-label={`${summary.sangeetAlcohol.yes} yes responses`}
                   />
                   <div
                     className="admin-alcohol-bar admin-alcohol-bar-no"
                     style={{
-                      width: summary.sangeetAlcohol.yes + summary.sangeetAlcohol.no > 0
-                        ? `${Math.round((summary.sangeetAlcohol.no / (summary.sangeetAlcohol.yes + summary.sangeetAlcohol.no)) * 100)}%`
-                        : "0%",
+                      width:
+                        summary.sangeetAlcohol.yes + summary.sangeetAlcohol.no > 0
+                          ? `${Math.round(
+                              (summary.sangeetAlcohol.no /
+                                (summary.sangeetAlcohol.yes + summary.sangeetAlcohol.no)) *
+                                100,
+                            )}%`
+                          : "0%",
                     }}
-                    aria-label={`${summary.sangeetAlcohol.no} No responses`}
+                    aria-label={`${summary.sangeetAlcohol.no} no responses`}
                   />
                 </div>
                 <div className="admin-alcohol-legend">
-                  <span><span className="admin-alcohol-dot dot-yes" />Yes ({summary.sangeetAlcohol.yes})</span>
-                  <span><span className="admin-alcohol-dot dot-no" />No ({summary.sangeetAlcohol.no})</span>
+                  <span>
+                    <span className="admin-alcohol-dot dot-yes" />
+                    Yes ({summary.sangeetAlcohol.yes})
+                  </span>
+                  <span>
+                    <span className="admin-alcohol-dot dot-no" />
+                    No ({summary.sangeetAlcohol.no})
+                  </span>
                 </div>
               </div>
             </div>
 
->>>>>>> c5eaedb (Sangeet & Haldi invite)
             <div className="admin-responses">
               <div className="admin-responses-header">
                 <div>
@@ -288,10 +306,7 @@ export function AdminDashboard() {
                   <span>Status</span>
                   <span>Events</span>
                   <span>Guests</span>
-<<<<<<< HEAD
-=======
                   <span>Alcohol</span>
->>>>>>> c5eaedb (Sangeet & Haldi invite)
                   <span>Message</span>
                 </div>
                 {summary.responses.map((response) => (
@@ -317,10 +332,7 @@ export function AdminDashboard() {
                     <span>{response.status}</span>
                     <span>{response.events.join(", ") || "None"}</span>
                     <span>{response.guestCount}</span>
-<<<<<<< HEAD
-=======
-                    <span>{(response as {sangeetAlcohol?: string}).sangeetAlcohol ?? "—"}</span>
->>>>>>> c5eaedb (Sangeet & Haldi invite)
+                    <span>{response.sangeetAlcohol ?? "-"}</span>
                     <span>{response.message || "No message"}</span>
                   </label>
                 ))}

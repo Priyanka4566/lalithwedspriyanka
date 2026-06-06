@@ -36,8 +36,6 @@ export type WeddingEvent = {
 
 export const weddingEvents: WeddingEvent[] = [
   {
-<<<<<<< HEAD
-=======
     id: "sangeeth",
     sectionClassName: "sangeeth-section",
     label: "An Evening of Music & Dance",
@@ -71,7 +69,6 @@ export const weddingEvents: WeddingEvent[] = [
     },
   },
   {
->>>>>>> c5eaedb (Sangeet & Haldi invite)
     id: "haldi",
     sectionClassName: "haldi-section",
     label: "Sacred Turmeric Ritual",
@@ -104,44 +101,6 @@ export const weddingEvents: WeddingEvent[] = [
       outfitStrong: { color: "#8B6000" },
     },
   },
-<<<<<<< HEAD
-  {
-    id: "wedding",
-    sectionClassName: "wedding-section",
-    label: "The Sacred Union",
-    title: "Wedding Ceremony",
-    date: "July 4, 2026 · Muhurtham 10:08 AM",
-    responseLabel: "Wedding — July 4",
-    description:
-      "A sacred Telugu wedding ceremony celebrating the eternal bond blessed by Lord Ganesha. Beneath fragrant floral mandaps and the sacred fire, we take our seven vows in the presence of our beloved family and friends.",
-    outfitTitle: "Traditional Attire",
-    outfitColumns: [
-      {
-        label: "Groom",
-        lines: ["Panchakattu", "Silk dhoti", "Traditional South Indian attire"],
-      },
-      {
-        label: "Bride",
-        lines: ["Kanchipuram silk saree", "Temple jewelry", "Jasmine flowers"],
-      },
-    ],
-    extraBlessing: "శుభం భవతు ✦ కళ్యాణమస్తు",
-    image: { src: "/wedding_ceremony.jpeg", alt: "Wedding Ceremony" },
-    styles: {
-      title: { color: "#6B2D3A" },
-      date: { color: "#5A4030" },
-      description: { color: "#4A3040" },
-      outfitGuide: {
-        background: "rgba(180,100,120,0.06)",
-        border: "1px solid rgba(180,100,120,0.2)",
-      },
-      outfitTitle: { color: "#6B2D3A" },
-      outfitColumn: { color: "#4A3040" },
-      outfitStrong: { color: "#6B2D3A" },
-    },
-  },
-=======
->>>>>>> c5eaedb (Sangeet & Haldi invite)
 ];
 
 export const rsvpOptions: Array<{ value: RSVPStatus; label: string }> = [
@@ -177,11 +136,8 @@ export const travelCards = [
         <br />
         Greenwood, Indiana
         <br />
-<<<<<<< HEAD
-=======
         <br />
->>>>>>> c5eaedb (Sangeet & Haldi invite)
-        Drop by, say hello, and celebrate with us before the big day!
+        Your presence is the greatest gift, and we look forward to seeing you before the wedding to share laughter, joy, and special moments together ❤️
       </>
     ),
     cta: "Navigate Here",
