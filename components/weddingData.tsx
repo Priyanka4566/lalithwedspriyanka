@@ -137,7 +137,7 @@ export const travelCards = [
         Greenwood, Indiana
         <br />
         <br />
-        Your presence is the greatest gift, and we look forward to seeing you before the wedding to share laughter, joy, and special moments together ❤️
+        Drop by, say hello, and celebrate with us before the big day!
       </>
     ),
     cta: "Navigate Here",
